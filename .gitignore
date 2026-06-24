@@ -1,0 +1,19 @@
+.venv/
+__pycache__/
+.env
+token.json
+client_secret.json
+*.png
+*.jpg
+
+# アカウント情報・シークレットパスを含むため公開リポジトリでは除外（README.md を別途参照）
+CLAUDE.md
+# YouCam APIキー等が平文で含まれるため除外
+plan.md
+spec.md
+blog.md
+20260622.md
+20260623.md
+.claude/
+.adk/
+.adk/
