@@ -2,10 +2,12 @@
 
 記事:
 [「似合うメイク」を見て選べる花嫁の美容指示書ジェネレーターを爆速開発｜YouCam API × Virtual Try-on × ADK](https://zenn.dev/rrrrrrrrrrr/articles/b3a4d257487b82)
- Zennfes Spring 2026 応募記事のソースコードです。
+
+---
+ Zennfes Spring 2026 応募記事のソースコードです。  
  テーマ：[YouCam APIを活用した実装事例とアイデア（パーフェクト株式会社）](https://zenn.dev/contests/zennfes-spring-2026-perfect?tab=overview)
 
-
+---
 自撮り＋ドレス画像から、**似合うヘアメイクを可視化**し、サロンに提出できる構造化された
 **「美容指示書」**を生成する単一 ADK エージェントです。
 
