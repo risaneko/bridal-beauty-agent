@@ -1,5 +1,11 @@
 # bridal_beauty_agent — 花嫁の美容指示書ジェネレーター
 
+記事:
+[「似合うメイク」を見て選べる花嫁の美容指示書ジェネレーターを爆速開発｜YouCam API × Virtual Try-on × ADK](https://zenn.dev/rrrrrrrrrrr/articles/b3a4d257487b82)
+ Zennfes Spring 2026 応募記事のソースコードです。
+ テーマ：[YouCam APIを活用した実装事例とアイデア（パーフェクト株式会社）](https://zenn.dev/contests/zennfes-spring-2026-perfect?tab=overview)
+
+
 自撮り＋ドレス画像から、**似合うヘアメイクを可視化**し、サロンに提出できる構造化された
 **「美容指示書」**を生成する単一 ADK エージェントです。
 
@@ -66,7 +72,7 @@ beautyapi/
   **署名付き一時URL（`X-Amz-Expires=7200` ＝約2時間で失効）**で返るため、
   **必ず `gcs_save_result` で永続化してから**指示書に埋め込む。
 - **リージョン分離**：エージェント本体の Gemini（`gemini-3-flash-preview`）は `location=global` 必須。
-  Google Virtual Try-on（`virtual-try-on-001`, GA）は global 非対応 → us-central1 専用のため、
+  Google Virtual Try-on（`virtual-try-on-001`, GA）は global 非対応のため、
   `try_on_dress` 内で独立した genai クライアントを立てる。
 - **429（QPM超過）対策**：preview 枠は QPM が低く、ツール往復で LLM 呼び出しが連続して
   429 に当たりやすい。`agent.py` でモデルを `Gemini` オブジェクトにし、
@@ -93,7 +99,7 @@ beautyapi/
 | 変数 | 値の例 | 用途 |
 |---|---|---|
 | `YOUCAM_API_KEY` | （各自取得） | YouCam MCP の Bearer 認証 |
-| `GOOGLE_CLOUD_PROJECT` | `r-risa` | GCP プロジェクト |
+| `GOOGLE_CLOUD_PROJECT` | `your-project-name` | GCP プロジェクト |
 | `GOOGLE_CLOUD_LOCATION` | `global` | エージェント本体の Gemini |
 | `GOOGLE_GENAI_USE_VERTEXAI` | `TRUE` | Vertex AI 経由で genai を使う |
 | `VTO_LOCATION` | `us-central1` | Virtual Try-on 専用リージョン |
@@ -142,16 +148,6 @@ NGメイク: 囲み目, 濃い眉, つけまつ毛
 
 画像引数は **公開URL / ローカルパス / `gs://` URI** のいずれも使えます
 （`_load_image` が吸収）。ドレス画像は公開不要（`gs://` を認証付きで読み込み）。
-
----
-
-## 注意・セキュリティ
-
-- **YouCam API キーはメモ類（`spec.md` 等）にチャット平文で露出しています。
-  提出・公開前にローテーション必須。**
-- `.env` / `*.png` / `*.jpg` / `.venv/` は `.gitignore` 済み。
-- 詳細な設計判断（単一 vs マルチエージェント、VTO ツールの使い分け、ハマりどころ）は
-  `CLAUDE.md` / `plan.md` / `spec.md` を参照。
 
 ---
 
